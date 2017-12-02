@@ -1,0 +1,24 @@
+<div class="container">
+  <%= erb :_nav %>
+  <h1>Welcome to your profile <%= @user.username %> </h1>
+
+
+  <h3>Questions you've asked:</h3>
+  <ul>
+    <% @user.questions.each do |question| %>
+      <li class = "question_list_item" >Votes: <%= question.votes %> | <a href="/questions/<%="#{question.id}"%>"><%= question.title %></a></li>
+      <%end%>
+  </ul>
+
+  <h3>Answers you've posted:</h3>
+  <ul>
+    <% @user.answers.each do |answer| %>
+      <li class = "answer_list_item" >Votes: <%= answer.votes %> | <a href="/questions/<%="#{answer.question.id}"%>"><%= answer.body %></a></li><br>
+      <%end%>
+  </ul>
+ <a href="/users/logout">Logout</a>
+
+</div>
+
+
+

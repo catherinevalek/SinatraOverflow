@@ -1,0 +1,8 @@
+<%= erb :_nav %>
+<h1>Ask a doggone question:</h1>
+
+<form method="post" action="/questions/new/<%=@user%>">
+  <textarea cols="70" rows="1" name="title" type="text" placeholder="Put your question title here. Make sure it's really ambiguous."></textarea><br>
+  <textarea cols="70" rows="8" name="body" type="text" placeholder="Put the body of your question here."></textarea><br>
+  <input type="submit" value="submit" class="button">
+</form>

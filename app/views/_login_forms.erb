@@ -1,0 +1,36 @@
+<% if @error %>
+    <h1 style="color:red"><%= @error %></h1>
+  <% end %>
+
+  <% if @logout %>
+    <h1 style="color:purple"><%= @logout %></h1>
+  <% end %>
+
+  <% if @unauthorized %>
+    <h1 style="color:purple"><%= @unauthorized %></h1>
+  <% end %>
+
+  <form action="/users/register" method="post">
+      <h1>Please Register Here</h1>
+
+      <label><b>User Name</b></label>
+      <input type="text" placeholder="Enter User Name" name="username">
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password">
+
+      <button type="submit">Sign Up</button>
+  </form>
+<br><br>
+  <form action="/users/profile" method="post">
+      <h1>Or login here</h1>
+      <label><b>User Name</b></label>
+      <input type="text" placeholder="Enter User Name" name="username">
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password">
+
+      <button type="submit">Login</button>
+
+  </form>
+  <br><br>

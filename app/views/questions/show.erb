@@ -1,0 +1,67 @@
+<% if !@session %>
+  <%= erb :_login_forms %>
+<% end %>
+
+<div class = 'container'>
+
+  <%= erb :_nav %>
+
+<div id="question">
+
+
+  <button name="submit_param" value="submit_value" class="fa fa-sort-desc vote-button q-upvote-button" data-question-id="<%= @question.id%>"></button>
+   <h1><%= @question.title %></h1>
+
+  <button name="submit_param" value="submit_value" class="fa fa-sort-asc vote-button q-downvote-button" data-question-id="<%= @question.id%>"></button>
+  <h3><strong>Question votes: <span id='ques-vote-count'><%= @question.votes %></span></strong></h3>
+<p><%= @question.body %></p><br>
+
+
+<a class = "question_comment_button" href="/questions/<%=@question.id%>" >add a comment</a>
+  <%= erb :"_question_comments", layout: false, locals: { question: @question } %>
+
+  <div>
+    <% (@question_comments.where(question_id: @question.id)).each do |question_comment| %>
+      <p class = "question_comment"><span class = "question_comment_body"><%=question_comment.body%></span> by: <span class="author"><%= question_comment.commentor.username %></span></p>
+    <% end %>
+  </div>
+  <br>
+  </div>
+
+  <h4><%=@answers.count%> ANSWERS:</h4>
+
+  <ul class = "answer_list">
+  <% @answers.each do |answer| %>
+    <li class="answer">
+            <h3><strong>Answer votes: <span id='answ-vote-count'><%= answer.votes %></span></strong></h3>
+      <button name="submit_param" value="submit_value" class="fa fa-sort-desc vote-button a-upvote-button" data-question-id="<%= @question.id%>" data-answer-id="<%=answer.id%>"></button>
+      <p><%=answer.body%></p>
+      <button name="submit_param" value="submit_value" class="fa fa-sort-asc vote-button a-downvote-button" data-question-id="<%= @question.id%>" data-answer-id="<%=answer.id%>"></button>
+      <br><br>
+      <span class="author">author: <%= User.find(answer.solver_id).username %></span>
+      <br><br>
+
+      <a class = "answer_comment_button" href="/questions/<%=@question.id%>" >add a comment</a>
+      <%= erb :"_answer_comments", layout: false, locals: { question: @question, answer: answer } %>
+
+      <div>
+      <% (@answer_comments.where(answer_id: answer.id)).each do |answer_comment| %>
+      <p class = "answer_comment"><span class = "answer_comment_body"><%=answer_comment.body%></span> by: <span class="author"><%= answer_comment.commentor.username %></span></p>
+      <% end %>
+      </div>
+
+    </li>
+    <%end%>
+  </ul>
+  <br><br>
+
+  <p> Your Answer </p>
+  <form id = "answer_form" method="post" action="/questions/<%=@question.id%>">
+    <textarea cols="70" rows="8" name="body" type="text"></textarea><br><br>
+    <input type="submit" value="submit" class="button">
+  </form>
+
+
+  <!--make the below form a partial-->
+
+</div>
